@@ -1,19 +1,17 @@
 import type { NextConfig } from "next";
 
-
 const isProd = process.env.NODE_ENV === "production";
 
 const nextConfig: NextConfig = {
   basePath: isProd ? "/bt-test" : "", 
-  assetPrefix: isProd ? "<bt-test>" : "",
+  assetPrefix: isProd ? "/bt-test/" : "", 
   experimental: {
-    turbo: {
-    },
+    turbo: {},
   },
   images: {
     unoptimized: true,
   },
-  output: "export", 
+  output: "export",
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
