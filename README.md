@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Next.js TypeScript Tailwind Project
+This is a Next.js project bootstrapped with create-next-app. This project was created as a test for a potential employer, demonstrating the use of Next.js, TypeScript, and Tailwind CSS to build responsive and pixel-perfect designs based on a provided Figma file.
 
-## Getting Started
+Project Overview
+The design was built according to the Figma file provided by the employer. The goal was to create a responsive, pixel-perfect design across various screen sizes, with particular attention to desktop and mobile versions.
 
-First, run the development server:
+Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+5 Components:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Navbar
+- Buy Section
+- Trending Section
+- Learn More Section
+- Footer
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Responsive Design:
+Pixel-perfect designs for all screen sizes.
+Created desktop and mobile versions based on Figma specifications.
+Ensured proper layout adaptation for other screen sizes.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Navbar:
+Fully functional hamburger menu for small screens that opens and closes, improving the user experience.
 
-## Learn More
+Footer:
+Styled based on the Figma footer image, ensuring the look and feel matches the design.
 
-To learn more about Next.js, take a look at the following resources:
+Getting Started
+To get started with this project locally, clone the repository and install the necessary dependencies:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- git clone [repository-url]
+- cd [project-directory]
+- npm install
+- npm run dev
+- This will set up the development server. Open the application in your browser at http://localhost:3000.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Deploy on Vercel
+The easiest way to deploy your Next.js app is to use the Vercel Platform from the creators of Next.js.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Check out our Next.js deployment documentation for more details.
