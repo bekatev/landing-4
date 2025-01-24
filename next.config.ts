@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
     turbo: {},
   },
   images: {
-    unoptimized: true,
+    unoptimized: true, 
   },
   output: "export",
   webpack(config) {
