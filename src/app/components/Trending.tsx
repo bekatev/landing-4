@@ -9,7 +9,7 @@ import Card4 from "../../media/card4.png";
 
 const Trending = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const carouselRef = useRef<HTMLDivElement | null>(null); // Replaced 'any' with specific type
+  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
   const cards = [
     {
@@ -42,44 +42,38 @@ const Trending = () => {
     },
   ];
 
-  const handleControlClick = (index: number) => {
-    if (carouselRef.current) {
-      const cardWidth =
-        carouselRef.current.children[0] instanceof HTMLElement
-          ? carouselRef.current.children[0].offsetWidth + 20
-          : 0;
-      carouselRef.current.scrollLeft = cardWidth * index;
+  const handleScroll = () => {
+    if (scrollContainerRef.current) {
+      const { scrollLeft, clientWidth } = scrollContainerRef.current;
+      const cardWidth = clientWidth * 0.5 + 30;
+      const index = Math.round(scrollLeft / cardWidth);
+      setActiveIndex(index);
     }
-    setActiveIndex(index); // Update active index after scrolling
   };
 
-  const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
-    const target = event.target as HTMLDivElement; // Explicitly cast to HTMLDivElement
-    const scrollPosition = target.scrollLeft;
-    const cardWidth =
-      target.children[0] instanceof HTMLElement
-        ? target.children[0].offsetWidth + 20
-        : 0;
-    const newIndex = Math.round(scrollPosition / cardWidth);
-    setActiveIndex(newIndex);
+  const scrollToCard = (index: number) => {
+    if (scrollContainerRef.current) {
+      const cardWidth = scrollContainerRef.current.offsetWidth * 0.5 + 30;
+      scrollContainerRef.current.scrollTo({
+        left: index * cardWidth,
+        behavior: "smooth",
+      });
+    }
   };
 
   useEffect(() => {
-    const updateIndex = () => {
-      if (carouselRef.current) {
-        const scrollPosition = carouselRef.current.scrollLeft;
-        const cardWidth =
-          carouselRef.current.children[0] instanceof HTMLElement
-            ? carouselRef.current.children[0].offsetWidth + 20
-            : 0;
-        const newIndex = Math.round(scrollPosition / cardWidth);
-        setActiveIndex(newIndex);
-      }
-    };
+    const scrollContainer = scrollContainerRef.current;
 
-    window.addEventListener("resize", updateIndex);
+    if (scrollContainer) {
+      scrollContainer.addEventListener("scroll", handleScroll, {
+        passive: true,
+      });
+    }
+
     return () => {
-      window.removeEventListener("resize", updateIndex);
+      if (scrollContainer) {
+        scrollContainer.removeEventListener("scroll", handleScroll);
+      }
     };
   }, []);
 
@@ -149,8 +143,8 @@ const Trending = () => {
       <div
         className="lg:hidden flex justify-start items-center overflow-x-auto no-scrollbar"
         onScroll={handleScroll}
-        ref={carouselRef}
-        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }} // Remove native scrollbar styling
+        ref={scrollContainerRef}
+        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
         {cards.map((card, index) => (
           <div
@@ -201,7 +195,7 @@ const Trending = () => {
         ))}
       </div>
 
-      {/* Carousel controls for smaller screens */}
+      {/* Carousel controls */}
       <div className="md:hidden flex space-x-[0.625rem] justify-center py-[0.9688rem]">
         {cards.map((_, index) => (
           <button
@@ -209,7 +203,7 @@ const Trending = () => {
             className={`w-[1.625rem] h-[0.1875rem] rounded-full ${
               activeIndex === index ? "bg-[#343434]" : "bg-[#D9D9D9]"
             } transition-colors duration-300`}
-            onClick={() => handleControlClick(index)}
+            onClick={() => scrollToCard(index)}
           />
         ))}
       </div>

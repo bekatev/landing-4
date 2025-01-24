@@ -20,7 +20,7 @@ const LearnMore: React.FC = () => {
       const { scrollLeft, clientWidth } = scrollContainerRef.current;
       const cardWidth = clientWidth * 0.7 + 20;
       const index = Math.round(scrollLeft / cardWidth);
-      setActiveCard(index); // Update the active card based on scroll position
+      setActiveCard(index);
     }
   };
 
@@ -120,14 +120,14 @@ const LearnMore: React.FC = () => {
           ))}
         </div>
 
-        {/* Indicator Bars (Only for Small Screens) */}
+        {/* Indicator Bars */}
         <div className="flex md:hidden space-x-[0.625rem] py-[0.9688rem] justify-center mt-[0.2813rem]">
           {cards.map((_, index) => (
             <button
               key={index}
               onClick={() => {
                 scrollToCard(index);
-                setActiveCard(index); // Ensure the active card is updated when clicked
+                setActiveCard(index);
               }}
               className={`w-[1.625rem] h-[0.1875rem] rounded-full ${
                 activeCard === index ? "bg-[#343434]" : "bg-[#D9D9D9]"

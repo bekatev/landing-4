@@ -11,21 +11,18 @@ import Search from "../icons/Search.svg";
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Effect to lock body scroll when menu is open
   useEffect(() => {
     if (isMenuOpen) {
-      document.body.style.overflow = "hidden"; // Prevent scrolling when the menu is open
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "auto"; // Restore scrolling when the menu is closed
+      document.body.style.overflow = "auto";
     }
 
-    // Cleanup on unmount or when the menu closes
     return () => {
       document.body.style.overflow = "auto";
     };
   }, [isMenuOpen]);
 
-  // Handle overlay click to close the menu
   const handleOverlayClick = () => {
     setIsMenuOpen(false);
   };
