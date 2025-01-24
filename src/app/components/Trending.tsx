@@ -1,15 +1,15 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import Card1 from "../../media/card1.png";
 import Card2 from "../../media/card2.png";
 import Card3 from "../../media/card3.png";
 import Card4 from "../../media/card4.png";
-import Image from "next/image";
 
 const Trending = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const carouselRef = useRef<any>(null);
+  const carouselRef = useRef<HTMLDivElement | null>(null); // Replaced 'any' with specific type
 
   const cards = [
     {
@@ -44,31 +44,39 @@ const Trending = () => {
 
   const handleControlClick = (index: number) => {
     if (carouselRef.current) {
-      const cardWidth = carouselRef.current.children[0].offsetWidth + 20;
+      const cardWidth =
+        carouselRef.current.children[0] instanceof HTMLElement
+          ? carouselRef.current.children[0].offsetWidth + 20
+          : 0;
       carouselRef.current.scrollLeft = cardWidth * index;
     }
     setActiveIndex(index); // Update active index after scrolling
   };
 
-  const handleScroll = (event: any) => {
-    const scrollPosition = event.target.scrollLeft;
-    const cardWidth = event.target.children[0].offsetWidth + 20;
+  const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
+    const target = event.target as HTMLDivElement; // Explicitly cast to HTMLDivElement
+    const scrollPosition = target.scrollLeft;
+    const cardWidth =
+      target.children[0] instanceof HTMLElement
+        ? target.children[0].offsetWidth + 20
+        : 0;
     const newIndex = Math.round(scrollPosition / cardWidth);
     setActiveIndex(newIndex);
   };
 
   useEffect(() => {
-    // Ensure correct active index is set after scroll
     const updateIndex = () => {
       if (carouselRef.current) {
         const scrollPosition = carouselRef.current.scrollLeft;
-        const cardWidth = carouselRef.current.children[0].offsetWidth + 20;
+        const cardWidth =
+          carouselRef.current.children[0] instanceof HTMLElement
+            ? carouselRef.current.children[0].offsetWidth + 20
+            : 0;
         const newIndex = Math.round(scrollPosition / cardWidth);
         setActiveIndex(newIndex);
       }
     };
 
-    // Handle resizing or scrolling behavior
     window.addEventListener("resize", updateIndex);
     return () => {
       window.removeEventListener("resize", updateIndex);

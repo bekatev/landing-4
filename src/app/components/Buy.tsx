@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import Person1 from "../../media/person1.png";
 import Person2 from "../../media/person2.png";
 import Person3 from "../../media/person3.png";
@@ -6,6 +8,14 @@ import Virtual from "../../media/virtual.png";
 import Image from "next/image";
 
 const Buy = () => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+
   return (
     <div className="xl:py-[1.9063rem] md:pb-[4.2188rem] pb-[1.875rem] xl:px-[9rem] px-4 py-0 xl:flex block justify-center gap-[2.5rem]">
       <div className="col-span-2 text-[#0A0A0A] w-full md:w-[40.75rem] mx-auto xl:mx-0 mt-[1.6875rem] sm:mt-0">
@@ -33,9 +43,24 @@ const Buy = () => {
             <div className="ml-auto flex items-center space-x-2 mt-2">
               {/* Avatar Stack */}
               <div className="flex -space-x-2">
-                <Image src={Person1} alt="User 1" className="w-6 h-6" />
-                <Image src={Person2} alt="User 2" className="w-6 h-6" />
-                <Image src={Person3} alt="User 3" className="w-6 h-6" />
+                <Image
+                  src={Person1}
+                  alt="User 1"
+                  className="w-6 h-6"
+                  layout="intrinsic"
+                />
+                <Image
+                  src={Person2}
+                  alt="User 2"
+                  className="w-6 h-6"
+                  layout="intrinsic"
+                />
+                <Image
+                  src={Person3}
+                  alt="User 3"
+                  className="w-6 h-6"
+                  layout="intrinsic"
+                />
               </div>
 
               {/* User Count */}
@@ -74,6 +99,7 @@ const Buy = () => {
               src={Virtual}
               alt="virtual"
               className="w-[18.75rem] h-[12.1875rem]"
+              layout="intrinsic"
             />
           </div>
 
