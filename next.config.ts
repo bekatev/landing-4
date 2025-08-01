@@ -3,13 +3,13 @@ import type { NextConfig } from "next";
 const isProd = process.env.NODE_ENV === "production";
 
 const nextConfig: NextConfig = {
-  basePath: isProd ? "/bt-test" : "", 
-  assetPrefix: isProd ? "/bt-test/" : "", 
+  basePath: isProd ? "/landing-4" : "",
+  assetPrefix: isProd ? "/landing-4/" : "",
   experimental: {
     turbo: {},
   },
   images: {
-    unoptimized: true, 
+    unoptimized: true,
   },
   output: "export",
   webpack(config) {
